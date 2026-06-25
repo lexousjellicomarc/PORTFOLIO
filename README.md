@@ -218,3 +218,14 @@ This version cleans the large-screen layout after the screen-fit game polish:
 - Reduced heavy HUD clutter on medium desktop and short laptop screens.
 - Adjusted homepage desktop avatar sizing and content spacing for a cleaner one-screen layout.
 - Kept the screen-fit behavior, internal project scrolling, mobile bottom navigation, contact API, SEO assets, reduced-motion support, and full verification scripts working.
+
+## v2.4.0 Split-Load Reveal and Layout Polish Notes
+
+This version adds the requested loading reveal behavior and another visual polish pass:
+
+- Rebuilt the loading screen so it opens horizontally into two halves after loading completes.
+- The home page is now visible behind the loader as the top and bottom panels split away.
+- Added glowing center split line, cyber-grid loader panels, and a smoother LJ logo fade-out during reveal.
+- Preserved reduced-motion support so the loader still exits safely for users who prefer less animation.
+- Kept the cleaner desktop layout from v2.3.0 without reintroducing the duplicated quick menu.
+- Kept route-level screen-fit behavior, internal project scrolling, responsive avatar display, contact API validation, SEO assets, route checks, and audit checks working.
