@@ -229,3 +229,10 @@ This version adds the requested loading reveal behavior and another visual polis
 - Preserved reduced-motion support so the loader still exits safely for users who prefer less animation.
 - Kept the cleaner desktop layout from v2.3.0 without reintroducing the duplicated quick menu.
 - Kept route-level screen-fit behavior, internal project scrolling, responsive avatar display, contact API validation, SEO assets, route checks, and audit checks working.
+
+## Version 2.5.0 polish notes
+
+- Rebuilt the home page into one matched cyber/game interface instead of mixed floating elements.
+- Added a cleaner hero briefing panel, cockpit avatar panel, mission CTAs, responsive mobile avatar frame, stack chips, and balanced desktop spacing.
+- Kept the horizontal split loading animation, screen-fit route behavior, scrollable project mission board, contact API validation, SEO assets, and reduced-motion support.
+

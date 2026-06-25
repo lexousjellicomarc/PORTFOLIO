@@ -1,3 +1,4 @@
+import CircuitBackdrop from "./CircuitBackdrop";
 import CodeRain from "./CodeRain";
 
 const AnimatedBackground = () => {
@@ -10,7 +11,9 @@ const AnimatedBackground = () => {
       <span className="aurora-orb aurora-orb-white bottom-[-12rem] left-[35%] h-72 w-72 sm:h-[28rem] sm:w-[28rem]" />
       <div className="scanline absolute inset-0" />
       <CodeRain />
-      <div className="hex-grid absolute inset-0 opacity-[0.16]" />
+      <CircuitBackdrop />
+      <div className="hex-grid absolute inset-0 opacity-[0.12]" />
+      <div className="background-noise absolute inset-0" />
     </div>
   );
 };
