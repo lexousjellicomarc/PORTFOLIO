@@ -14,15 +14,15 @@ const ServiceSlider = () => {
       breakpoints={{
         320: {
           slidesPerView: 1,
-          spaceBetween: 15,
+          spaceBetween: 14,
         },
         640: {
           slidesPerView: 2,
-          spaceBetween: 15,
+          spaceBetween: 14,
         },
         960: {
           slidesPerView: 3,
-          spaceBetween: 15,
+          spaceBetween: 14,
         },
       }}
       pagination={{
@@ -30,14 +30,14 @@ const ServiceSlider = () => {
       }}
       modules={[FreeMode, Pagination]}
       freeMode
-      className="h-[420px] pb-12 sm:h-[450px] lg:h-[420px]"
+      className="service-swiper screen-card-height pb-10"
       aria-label="Services slider"
     >
       {serviceData.map((item, index) => (
         <SwiperSlide key={item.title} className="h-auto">
-          <article className="cyber-panel group flex h-full min-h-[330px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[rgba(13,17,35,0.58)] px-6 py-8 transition-all duration-300 hover:-translate-y-1 hover:bg-[rgba(65,47,123,0.22)] sm:min-h-[350px]">
-            <div className="mb-5 flex items-center justify-between">
-              <div className="grid h-14 w-14 place-items-center rounded-2xl border border-accent/30 bg-accent/10 text-4xl text-accent shadow-[0_0_35px_rgba(241,48,36,0.16)]">
+          <article className="cyber-panel group flex h-full min-h-[300px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[rgba(13,17,35,0.58)] px-5 py-6 transition-all duration-300 hover:-translate-y-1 hover:bg-[rgba(65,47,123,0.22)] sm:min-h-[320px] xl:min-h-0">
+            <div className="mb-4 flex items-center justify-between">
+              <div className="grid h-12 w-12 place-items-center rounded-2xl border border-accent/30 bg-accent/10 text-3xl text-accent shadow-[0_0_35px_rgba(241,48,36,0.16)]">
                 <item.Icon aria-hidden="true" />
               </div>
               <span className="game-chip px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-white/45">
@@ -45,8 +45,8 @@ const ServiceSlider = () => {
               </span>
             </div>
 
-            <div className="mb-8">
-              <h3 className="mb-3 text-lg font-semibold">{item.title}</h3>
+            <div className="mb-5">
+              <h3 className="mb-2 text-lg font-semibold">{item.title}</h3>
               <p className="max-w-[350px] text-sm leading-relaxed">
                 {item.description}
               </p>

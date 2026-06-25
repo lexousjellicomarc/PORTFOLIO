@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { BsArrowRight } from "react-icons/bs";
 
+import ScreenFrame from "../../components/ScreenFrame";
 import { siteConfig } from "../../data/siteConfig";
 import { fadeIn } from "../../variants";
 
@@ -92,56 +93,62 @@ const Contact = ({ initialStatus = emptyStatus }) => {
   };
 
   return (
-    <section className="min-h-screen xl:h-full bg-primary/30 pb-28 xl:pb-0">
-      <div className="container mx-auto px-5 sm:px-6 xl:px-0 py-32 pb-12 text-center xl:text-left flex items-center justify-center min-h-screen xl:h-full">
-        <div className="flex flex-col w-full max-w-[700px]">
-          <motion.h2
-            variants={fadeIn("up", 0.2)}
-            initial="hidden"
-            animate="show"
-            exit="hidden"
-            className="h2 text-center mb-6"
-          >
+    <ScreenFrame className="bg-primary/30" frameClassName="text-center xl:text-left">
+      <div className="container desktop-safe-container relative z-10 mx-auto grid w-full items-center gap-6 px-5 sm:px-6 xl:grid-cols-[minmax(280px,0.45fr)_minmax(0,0.9fr)] xl:gap-10 xl:px-0">
+        <motion.div
+          variants={fadeIn("up", 0.2)}
+          initial="hidden"
+          animate="show"
+          exit="hidden"
+          className="mx-auto max-w-[520px] xl:mx-0"
+        >
+          <p className="mb-3 text-xs uppercase tracking-[0.3em] text-accent">
+            Contact terminal
+          </p>
+          <h2 className="h2 mb-4">
             Let&apos;s <span className="text-accent">connect.</span>
-          </motion.h2>
+          </h2>
+          <p className="mx-auto mb-5 max-w-[480px] text-sm sm:text-base xl:mx-0">
+            Send a message through the form or email me directly. The form is
+            compact, validated, and ready for a webhook/email provider.
+          </p>
 
-          <motion.div
-            variants={fadeIn("up", 0.3)}
-            initial="hidden"
-            animate="show"
-            exit="hidden"
-            className="mx-auto mb-10 max-w-[680px] text-center"
-          >
-            <p>
-              Send a message through the form or email me directly at{" "}
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="text-accent transition-colors duration-300 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent rounded-sm"
-              >
-                {siteConfig.email}
-              </a>
-              .
+          <div className="cyber-panel mx-auto max-w-[460px] rounded-3xl border border-white/10 bg-white/[0.035] p-4 text-left backdrop-blur-md xl:mx-0">
+            <p className="mb-3 text-[10px] uppercase tracking-[0.26em] text-white/35">
+              Direct channel
             </p>
-            <div className="mt-4 flex flex-wrap justify-center gap-3 text-xs uppercase tracking-[0.2em] text-white/45">
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="block break-all text-sm text-accent transition-colors duration-300 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+            >
+              {siteConfig.email}
+            </a>
+            <div className="mt-4 flex flex-wrap gap-3 text-xs uppercase tracking-[0.18em] text-white/45">
               <span>{siteConfig.location}</span>
               <span aria-hidden="true">•</span>
               <a
                 href={`tel:${siteConfig.phone.replace(/[^0-9+]/g, "")}`}
-                className="transition-colors duration-300 hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent rounded-sm"
+                className="transition-colors duration-300 hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
               >
                 {siteConfig.phone}
               </a>
             </div>
-          </motion.div>
+          </div>
+        </motion.div>
 
-          <p id="contact-help" className="sr-only">All fields are required. The message must contain at least 10 characters.</p>
+        <motion.div
+          variants={fadeIn("up", 0.35)}
+          initial="hidden"
+          animate="show"
+          exit="hidden"
+          className="screen-card-height cyber-panel mx-auto flex w-full max-w-[700px] flex-col rounded-[2rem] border border-white/10 bg-white/[0.03] p-4 shadow-[0_0_55px_rgba(241,48,36,0.08)] backdrop-blur-md sm:p-5 xl:mx-0"
+        >
+          <p id="contact-help" className="sr-only">
+            All fields are required. The message must contain at least 10 characters.
+          </p>
 
-          <motion.form
-            variants={fadeIn("up", 0.4)}
-            initial="hidden"
-            animate="show"
-            exit="hidden"
-            className="flex-1 flex flex-col gap-6 w-full mx-auto"
+          <form
+            className="flex h-full flex-col gap-4"
             onSubmit={handleSubmit}
             autoComplete="on"
             name="contact"
@@ -164,37 +171,41 @@ const Contact = ({ initialStatus = emptyStatus }) => {
               className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden"
             />
 
-            <div className="flex flex-col sm:flex-row gap-6 w-full">
-              <label className="sr-only" htmlFor="name">
-                Name
-              </label>
-              <input
-                id="name"
-                type="text"
-                name="name"
-                placeholder="Name"
-                className="input"
-                disabled={isLoading}
-                maxLength={80}
-                autoComplete="name"
-                required
-              />
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label className="sr-only" htmlFor="name">
+                  Name
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  className="input"
+                  disabled={isLoading}
+                  maxLength={80}
+                  autoComplete="name"
+                  required
+                />
+              </div>
 
-              <label className="sr-only" htmlFor="email">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                name="email"
-                placeholder="E-mail"
-                className="input"
-                disabled={isLoading}
-                maxLength={120}
-                autoComplete="email"
-                inputMode="email"
-                required
-              />
+              <div>
+                <label className="sr-only" htmlFor="email">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="E-mail"
+                  className="input"
+                  disabled={isLoading}
+                  maxLength={120}
+                  autoComplete="email"
+                  inputMode="email"
+                  required
+                />
+              </div>
             </div>
 
             <label className="sr-only" htmlFor="subject">
@@ -219,12 +230,12 @@ const Contact = ({ initialStatus = emptyStatus }) => {
               id="message"
               name="message"
               placeholder="Message..."
-              className="textarea"
+              className="textarea flex-1"
               disabled={isLoading}
               required
               minLength={10}
               maxLength={2000}
-              rows={6}
+              rows={5}
             />
 
             {status.message && (
@@ -232,7 +243,7 @@ const Contact = ({ initialStatus = emptyStatus }) => {
                 id="contact-status"
                 className={`${getStatusClassName(
                   status.type,
-                )} text-sm text-center xl:text-left`}
+                )} text-center text-sm xl:text-left`}
                 role={status.type === "error" ? "alert" : "status"}
                 aria-live="polite"
               >
@@ -242,22 +253,22 @@ const Contact = ({ initialStatus = emptyStatus }) => {
 
             <button
               type="submit"
-              className="btn mx-auto xl:mx-0 rounded-full border border-white/50 max-w-[190px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+              className="btn group relative mx-auto flex w-full items-center justify-center overflow-hidden rounded-full border border-white/50 px-8 transition-all duration-300 hover:border-accent disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:w-auto sm:max-w-[190px] xl:mx-0"
               disabled={isLoading}
             >
-              <span className="group-hover:-translate-y-[120%] group-hover:opacity-0 transition-all duration-500">
+              <span className="transition-all duration-500 group-hover:-translate-y-[120%] group-hover:opacity-0">
                 {isLoading ? "Sending..." : "Let's talk"}
               </span>
 
               <BsArrowRight
-                className="-translate-y-[120%] opacity-0 group-hover:flex group-hover:-translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute text-[22px]"
+                className="absolute -translate-y-[120%] text-[22px] opacity-0 transition-all duration-300 group-hover:flex group-hover:-translate-y-0 group-hover:opacity-100"
                 aria-hidden="true"
               />
             </button>
-          </motion.form>
-        </div>
+          </form>
+        </motion.div>
       </div>
-    </section>
+    </ScreenFrame>
   );
 };
 

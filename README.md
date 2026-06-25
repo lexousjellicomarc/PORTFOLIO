@@ -12,7 +12,7 @@ A polished, production-ready portfolio template built with **Next.js 16**, **Rea
 - Split portfolio content into focused files inside `data/` for cleaner editing and lighter client bundles.
 - Improved SEO defaults, page-specific metadata, canonical URL support, Open Graph/Twitter metadata, generated robots.txt, generated sitemap.xml, generated site.webmanifest, custom 404 page, and custom 500 page.
 - Added a custom document with `<html lang="en">` for better accessibility and SEO.
-- Fixed mobile scrolling by replacing locked full-screen overflow behavior with responsive `min-height` sections.
+- Added a screen-fit route layout so each page fills the viewport cleanly, avoids unnecessary body scrolling, and only uses internal scroll areas when content truly needs it.
 - Improved project grid responsiveness, image sizing, hover/focus states, keyboard accessibility, and about-page tab semantics with stable editable tab IDs.
 - Improved accessibility for navigation, buttons, decorative images, active route state, form feedback, skip-to-content behavior, reduced-motion preferences, and focus outlines.
 - Cleaned global CSS, Swiper styling, Tailwind configuration, package metadata, and reusable template structure.
@@ -178,3 +178,43 @@ This version adds a stronger programmer-inspired, game-style interface layer whi
 - Upgraded the Work page into a mission-board style scrollable project list with quest numbers, rank badges, completion meters, tags, and stronger hover/focus effects.
 - Kept reduced-motion support so users who prefer less animation are not forced into heavy motion effects.
 - Preserved the existing verified route/API checks, SEO assets, contact form behavior, mobile avatar fix, and scrollable project UX.
+
+## v2.1.0 Responsive Game Polish Notes
+
+This version adds another polish pass focused on smoother responsiveness, better mobile spacing, and a cooler programmer/game interface without breaking the working portfolio flow:
+
+- Added a floating desktop quick-access command panel for Projects, About, and Contact.
+- Added an animated achievement-style portfolio toast on larger screens.
+- Converted the bottom mobile navigation into a safer glass/HUD navigation bar with active orbit effects and safe-area spacing.
+- Improved the fixed header with a compact glass bar so it stays cleaner while scrolling.
+- Optimized the mouse-follow glow so it updates CSS variables through `requestAnimationFrame` instead of re-rendering React state on every pointer move.
+- Added a mobile HUD status chip while keeping heavier radar/HUD effects on desktop.
+- Upgraded the Work page mission board with category filters, scroll progress, project scanline effects, and full-width mobile project buttons.
+- Improved mobile section spacing with `100dvh` and safe-area bottom padding so content is not covered by phone browser bars or the bottom nav.
+- Kept reduced-motion support for the new orbit, scanline, toast, and quick-panel animations.
+
+
+## v2.2.0 Screen-Fit Page Polish Notes
+
+This version focuses on making the portfolio feel like a polished page-by-page game interface where each route fits the visible screen as much as possible:
+
+- Added a reusable `ScreenFrame` layout wrapper for consistent full-viewport pages.
+- Locked route-level overflow so the browser body does not scroll when the page content fits.
+- Added internal scroll areas only where needed, especially the Work mission board and About tab panel.
+- Rebalanced Home, About, Services, Work, Highlights, Contact, 404, and 500 pages to fit better inside one viewport.
+- Added compact-height rules for shorter laptop screens so non-critical decorative blocks hide before the layout overflows.
+- Improved project mission-board height, card spacing, filter panel spacing, and internal scroll behavior.
+- Compact-polished services, contact form, and highlights slider so they fit cleaner without losing content.
+- Added a subtle top screen scan line and loadout HUD panel for an extra game/programmer feel.
+- Preserved mobile safe-area spacing, avatar visibility, reduced-motion support, SEO assets, route checks, and the validated contact API.
+
+## v2.3.0 Desktop Layout Cleanup Notes
+
+This version cleans the large-screen layout after the screen-fit game polish:
+
+- Removed the duplicated desktop quick-access command menu so the right-side primary navigation is the only fixed menu.
+- Removed the extra fixed loadout panel from the homepage to reduce desktop clutter.
+- Rebalanced desktop content width so pages stay centered and avoid the right navigation rail.
+- Reduced heavy HUD clutter on medium desktop and short laptop screens.
+- Adjusted homepage desktop avatar sizing and content spacing for a cleaner one-screen layout.
+- Kept the screen-fit behavior, internal project scrolling, mobile bottom navigation, contact API, SEO assets, reduced-motion support, and full verification scripts working.

@@ -6,9 +6,9 @@ import { siteConfig } from "../data/siteConfig";
 
 const Header = () => {
   return (
-    <header className="absolute z-30 w-full px-5 sm:px-8 xl:px-0">
+    <header className="fixed left-0 top-0 z-40 w-full px-5 pt-[env(safe-area-inset-top)] sm:px-8 xl:px-0">
       <div className="container mx-auto">
-        <div className="flex items-center justify-between gap-4 py-5 sm:py-7 xl:h-[90px] xl:py-0">
+        <div className="mt-3 flex items-center justify-between gap-4 rounded-full border border-white/10 bg-black/15 px-3 py-3 shadow-[0_0_35px_rgba(0,0,0,0.18)] backdrop-blur-xl sm:px-4 xl:h-[76px] xl:py-0">
           <Link
             href="/"
             aria-label="Go to home page"

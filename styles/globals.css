@@ -4,6 +4,7 @@
 
 #__next {
   min-height: 100%;
+  height: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -46,11 +47,13 @@
   html {
     @apply scroll-smooth;
     min-height: 100%;
+    height: 100%;
   }
 
   body {
-    @apply bg-secondary overflow-x-hidden leading-relaxed text-white;
+    @apply bg-secondary overflow-hidden leading-relaxed text-white;
     min-height: 100%;
+    height: 100%;
   }
 
   ::selection {
@@ -58,19 +61,21 @@
   }
 
   .page {
-    @apply w-full min-h-screen overflow-x-hidden;
+    @apply w-full overflow-hidden;
+    height: 100dvh;
+    min-height: 100dvh;
   }
 
   .h1 {
-    @apply text-[35px] leading-tight md:text-[60px] md:leading-[1.3] mb-8 font-semibold;
+    @apply text-[clamp(2rem,7.2vw,3.8rem)] leading-[1.08] md:leading-[1.12] font-semibold;
   }
 
   .h2 {
-    @apply text-[35px] leading-tight md:text-[54px] md:leading-[1.3] mb-4 font-semibold;
+    @apply text-[clamp(2rem,6.4vw,3.4rem)] leading-[1.08] md:leading-[1.12] font-semibold;
   }
 
   p {
-    @apply leading-[1.8] text-white/60 font-light;
+    @apply leading-[1.65] text-white/60 font-light;
   }
 
   .btn,
@@ -88,7 +93,7 @@
   }
 
   .textarea {
-    @apply w-full h-[180px] p-6 rounded-lg resize-none;
+    @apply w-full h-[150px] p-6 rounded-lg resize-none;
   }
 }
 
@@ -574,5 +579,451 @@
   .stat-meter::before,
   .game-float {
     animation: none !important;
+  }
+}
+
+@keyframes orbitPulse {
+  0%,
+  100% {
+    transform: scale(0.82) rotate(0deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.08) rotate(180deg);
+    opacity: 1;
+  }
+}
+
+@keyframes scanProject {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes toastGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 34px rgba(241, 48, 36, 0.12), inset 0 0 18px rgba(255, 255, 255, 0.02);
+  }
+  50% {
+    box-shadow: 0 0 52px rgba(47, 132, 255, 0.18), inset 0 0 24px rgba(255, 255, 255, 0.04);
+  }
+}
+
+body {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.nav-rail {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0 0 max(0.55rem, env(safe-area-inset-bottom));
+}
+
+.nav-shell {
+  margin-inline: auto;
+  width: min(100% - 1rem, 34rem);
+  min-height: 4.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  background: rgba(5, 6, 12, 0.72);
+  padding: 0.55rem 0.75rem;
+  color: white;
+  box-shadow: 0 -12px 45px rgba(0, 0, 0, 0.26), inset 0 0 20px rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(18px);
+}
+
+.nav-link {
+  position: relative;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border-radius: 9999px;
+  font-size: 1.25rem;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: #f13024;
+  transform: translateY(-2px);
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid #f13024;
+  outline-offset: 4px;
+}
+
+.nav-link-orbit {
+  position: absolute;
+  inset: 0.1rem;
+  border: 1px solid transparent;
+  border-radius: inherit;
+  opacity: 0;
+  background:
+    linear-gradient(rgba(5, 6, 12, 0.86), rgba(5, 6, 12, 0.86)) padding-box,
+    conic-gradient(from 0deg, rgba(241, 48, 36, 0.9), rgba(47, 132, 255, 0.85), rgba(241, 48, 36, 0.9)) border-box;
+  box-shadow: 0 0 24px rgba(241, 48, 36, 0.18);
+}
+
+.nav-link.is-active .nav-link-orbit {
+  opacity: 1;
+  animation: orbitPulse 2.8s ease-in-out infinite;
+}
+
+.nav-tooltip {
+  position: absolute;
+  right: 100%;
+  display: none;
+  padding-right: 0.95rem;
+  pointer-events: none;
+}
+
+.nav-tooltip-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  background: white;
+  padding: 0.45rem 0.65rem;
+  color: #131424;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.nav-tooltip-card::after {
+  content: "";
+  position: absolute;
+  right: -0.45rem;
+  border-block: 0.35rem solid transparent;
+  border-left: 0.5rem solid white;
+}
+
+.achievement-toast {
+  animation: toastGlow 2.8s ease-in-out infinite;
+}
+
+.mission-scroll-panel {
+  max-height: none;
+  overflow-y: visible;
+}
+
+.mission-scanline {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 9px,
+    rgba(255, 255, 255, 0.08) 10px,
+    transparent 12px
+  );
+  animation: scanProject 1.7s linear infinite;
+}
+
+.mission-card::after {
+  background: linear-gradient(135deg, transparent 0 40%, rgba(47, 132, 255, 0.04), transparent 58%);
+}
+
+@media (min-width: 768px) {
+  .mission-scroll-panel {
+    max-height: min(760px, calc(100dvh - 13.5rem));
+    overflow-y: auto;
+  }
+}
+
+@media (min-width: 1200px) {
+  .nav-rail {
+    inset: 0 2% 0 auto;
+    display: flex;
+    width: 4rem;
+    height: 100dvh;
+    align-items: center;
+    padding: 0;
+  }
+
+  .nav-shell {
+    width: 4rem;
+    min-height: auto;
+    padding: 1rem 0.6rem;
+  }
+
+  .nav-link {
+    font-size: 1.2rem;
+  }
+
+  .nav-link:hover .nav-tooltip,
+  .nav-link:focus-visible .nav-tooltip {
+    display: block;
+  }
+}
+
+@media (max-width: 767px) {
+  .code-rain {
+    opacity: 0.18;
+  }
+
+  .code-rain-column {
+    gap: 1.35rem;
+    font-size: 0.58rem;
+  }
+
+  .hud-corner {
+    opacity: 0.38;
+  }
+
+  .hud-corner-tl,
+  .hud-corner-tr {
+    top: 6rem;
+  }
+
+  .mission-scroll-panel > .sticky {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-link.is-active .nav-link-orbit,
+  .achievement-toast,
+  .mission-scanline {
+    animation: none !important;
+  }
+}
+
+.game-hud-mobile {
+  position: absolute;
+}
+
+#page-content {
+  height: 100dvh;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+.screen-page {
+  position: relative;
+  isolation: isolate;
+  height: 100dvh;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+.screen-page::before {
+  content: "";
+  position: absolute;
+  inset-inline: clamp(1rem, 5vw, 5rem);
+  top: calc(5.6rem + env(safe-area-inset-top));
+  z-index: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(241, 48, 36, 0.55), rgba(47, 132, 255, 0.45), transparent);
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.screen-frame {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-top: calc(6.25rem + env(safe-area-inset-top));
+  padding-bottom: calc(6rem + env(safe-area-inset-bottom));
+}
+
+.screen-home-frame {
+  padding-top: calc(6rem + env(safe-area-inset-top));
+}
+
+.screen-card-height {
+  height: min(560px, calc(100dvh - 12.25rem - env(safe-area-inset-top) - env(safe-area-inset-bottom)));
+  min-height: 0;
+}
+
+.work-board-height {
+  height: min(620px, calc(100dvh - 12.25rem - env(safe-area-inset-top) - env(safe-area-inset-bottom)));
+}
+
+.service-swiper,
+.highlight-swiper {
+  min-height: 0;
+}
+
+.service-swiper .swiper-wrapper,
+.highlight-swiper .swiper-wrapper {
+  align-items: stretch;
+}
+
+.service-swiper .swiper-slide,
+.highlight-swiper .swiper-slide {
+  height: auto;
+}
+
+.loadout-panel {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .screen-frame {
+    padding-inline: 0;
+  }
+}
+
+
+@media (min-width: 1200px) {
+  .desktop-safe-container {
+    width: min(100% - 8.5rem, 1180px);
+    max-width: 1180px;
+    padding-left: clamp(1rem, 2.4vw, 2.75rem) !important;
+    padding-right: clamp(4.75rem, 6vw, 6rem) !important;
+  }
+
+  .game-hud-panel {
+    transform: translateZ(0);
+  }
+
+  .radar-widget {
+    width: 7.25rem;
+    height: 7.25rem;
+    opacity: 0.82;
+  }
+}
+
+@media (min-width: 1200px) {
+  .screen-frame {
+    overflow-y: hidden;
+    padding-top: calc(6.1rem + env(safe-area-inset-top));
+    padding-bottom: 1.35rem;
+  }
+
+  .screen-home-frame {
+    padding-top: calc(5.95rem + env(safe-area-inset-top));
+  }
+
+  .screen-card-height {
+    height: min(600px, calc(100dvh - 9.25rem - env(safe-area-inset-top)));
+  }
+
+  .work-board-height {
+    height: min(650px, calc(100dvh - 9.25rem - env(safe-area-inset-top)));
+  }
+
+  .mission-scroll-panel {
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .screen-page::before {
+    top: calc(5.35rem + env(safe-area-inset-top));
+    inset-inline: 1.25rem;
+  }
+
+  .screen-frame {
+    padding-top: calc(5.85rem + env(safe-area-inset-top));
+    padding-bottom: calc(5.75rem + env(safe-area-inset-bottom));
+  }
+
+  .screen-card-height {
+    height: auto;
+    max-height: calc(100dvh - 12rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    overflow-y: auto;
+  }
+
+  .work-board-height {
+    height: auto;
+    max-height: none;
+  }
+
+  .mission-scroll-panel {
+    max-height: min(58dvh, 560px);
+    overflow-y: auto;
+  }
+}
+
+@media (max-height: 780px) and (min-width: 1200px) {
+  .screen-frame {
+    padding-top: calc(5.65rem + env(safe-area-inset-top));
+    padding-bottom: 1rem;
+  }
+
+  .screen-home-frame {
+    padding-top: calc(5.55rem + env(safe-area-inset-top));
+  }
+
+  .screen-only-tall {
+    display: none !important;
+  }
+
+  .screen-card-height {
+    height: calc(100dvh - 7.1rem - env(safe-area-inset-top));
+  }
+
+  .work-board-height {
+    height: calc(100dvh - 7.1rem - env(safe-area-inset-top));
+  }
+
+  .home-stat-grid,
+  .about-stat-grid {
+    gap: 0.55rem;
+  }
+
+  .h1 {
+    font-size: clamp(2rem, 4.8vw, 3.15rem);
+  }
+
+  .h2 {
+    font-size: clamp(2rem, 4.2vw, 2.85rem);
+  }
+}
+
+@media (max-height: 680px) {
+  .screen-only-comfort {
+    display: none !important;
+  }
+
+  .screen-frame {
+    align-items: flex-start;
+  }
+
+  .screen-home-frame {
+    align-items: center;
+  }
+}
+
+
+@media (min-width: 1200px) and (max-width: 1365px) {
+  .desktop-safe-container {
+    width: min(100% - 7rem, 1080px);
+    padding-left: 1.4rem !important;
+    padding-right: 5rem !important;
+  }
+
+  .game-hud-panel {
+    display: none;
+  }
+
+  .radar-widget {
+    right: 5.8rem;
+    bottom: 5.8rem;
+    width: 6.5rem;
+    height: 6.5rem;
+    opacity: 0.55;
+  }
+}
+
+@media (min-width: 1200px) and (max-height: 820px) {
+  .radar-widget,
+  .game-hud-panel {
+    display: none;
   }
 }

@@ -4,6 +4,7 @@ import CountUp from "react-countup";
 
 import Avatar from "../../components/Avatar";
 import Circles from "../../components/Circles";
+import ScreenFrame from "../../components/ScreenFrame";
 import { aboutData, aboutSummary, statsData } from "../../data/about";
 import { fadeIn } from "../../variants";
 
@@ -62,7 +63,7 @@ const About = () => {
   const activeTabId = getStableTabId(aboutData[index], index);
 
   return (
-    <section className="relative min-h-screen bg-primary/30 py-32 pb-36 text-center xl:h-full xl:pb-20 xl:text-left">
+    <ScreenFrame className="bg-primary/30" frameClassName="text-center xl:text-left">
       <Circles />
 
       <motion.div
@@ -70,19 +71,19 @@ const About = () => {
         initial="hidden"
         animate="show"
         exit="hidden"
-        className="pointer-events-none hidden xl:absolute xl:bottom-0 xl:-left-[370px] xl:flex"
+        className="pointer-events-none hidden xl:absolute xl:bottom-[-8%] xl:-left-[360px] xl:flex"
       >
-        <Avatar className="w-[737px]" />
+        <Avatar className="w-[min(48vw,690px)]" />
       </motion.div>
 
-      <div className="container relative z-10 mx-auto flex min-h-[calc(100vh-16rem)] flex-col items-center gap-8 px-5 sm:px-6 xl:h-full xl:flex-row xl:gap-x-6 xl:px-0">
-        <div className="flex flex-1 flex-col justify-center">
+      <div className="container desktop-safe-container relative z-10 mx-auto grid w-full items-center gap-6 px-5 sm:px-6 xl:grid-cols-[minmax(0,0.9fr)_minmax(520px,1fr)] xl:gap-10 xl:px-0">
+        <div className="mx-auto flex max-w-[650px] flex-col justify-center xl:mx-0">
           <motion.h2
             variants={fadeIn("right", 0.2)}
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="h2"
+            className="h2 mb-3"
           >
             Building <span className="text-accent">functional</span> systems
             with clean design.
@@ -91,7 +92,7 @@ const About = () => {
             variants={fadeIn("right", 0.4)}
             initial="hidden"
             animate="show"
-            className="mx-auto mb-6 max-w-[620px] px-2 text-sm sm:text-base xl:mx-0 xl:mb-10 xl:px-0"
+            className="mx-auto mb-4 max-w-[620px] px-2 text-sm sm:text-base xl:mx-0 xl:px-0"
           >
             {aboutSummary}
           </motion.p>
@@ -100,27 +101,27 @@ const About = () => {
             variants={fadeIn("right", 0.5)}
             initial="hidden"
             animate="show"
-            className="mx-auto mb-8 flex w-[210px] sm:w-[260px] xl:hidden"
+            className="mx-auto mb-4 flex w-[clamp(140px,38vw,230px)] xl:hidden"
           >
-            <Avatar sizes="260px" />
+            <Avatar sizes="230px" />
           </motion.div>
 
           <motion.div
             variants={fadeIn("right", 0.6)}
             initial="hidden"
             animate="show"
-            className="mx-auto mb-8 grid w-full max-w-xl grid-cols-2 gap-4 sm:grid-cols-4 xl:mx-0 xl:max-w-none xl:gap-x-6"
+            className="about-stat-grid mx-auto grid w-full max-w-xl grid-cols-2 gap-3 sm:grid-cols-4 xl:mx-0 xl:max-w-none"
           >
             {statsData.map((stat) => (
               <div
-                className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-5 text-center xl:border-0 xl:bg-transparent xl:px-0 xl:py-0 xl:text-left"
+                className="cyber-panel rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-4 text-center backdrop-blur-sm xl:text-left"
                 key={stat.label}
               >
-                <div className="mb-2 text-2xl font-extrabold text-accent xl:text-4xl">
+                <div className="mb-1 text-2xl font-extrabold text-accent xl:text-3xl">
                   <CountUp start={0} end={stat.value} duration={4} />
                   {stat.suffix || ""}
                 </div>
-                <div className="mx-auto max-w-[120px] text-xs uppercase leading-[1.4] tracking-[1px] text-white/70 xl:mx-0">
+                <div className="mx-auto max-w-[120px] text-[10px] uppercase leading-[1.4] tracking-[1px] text-white/70 xl:mx-0">
                   {stat.label}
                 </div>
               </div>
@@ -133,10 +134,10 @@ const About = () => {
           initial="hidden"
           animate="show"
           exit="hidden"
-          className="flex min-h-[460px] w-full flex-col rounded-3xl border border-white/10 bg-white/[0.02] p-5 backdrop-blur-sm sm:p-6 xl:max-w-[50%] xl:border-0 xl:bg-transparent xl:p-0 xl:backdrop-blur-0"
+          className="screen-card-height flex w-full flex-col rounded-3xl border border-white/10 bg-white/[0.025] p-4 shadow-[0_0_45px_rgba(47,132,255,0.06)] backdrop-blur-md sm:p-5 xl:p-6"
         >
           <div
-            className="mx-auto mb-6 flex flex-wrap justify-center gap-x-4 gap-y-4 xl:mx-0 xl:justify-start xl:gap-x-8"
+            className="portfolio-scrollbar mx-auto mb-4 flex max-w-full gap-x-4 gap-y-3 overflow-x-auto pb-2 xl:mx-0 xl:justify-start"
             role="tablist"
             aria-label="About information tabs"
             onKeyDown={handleTabKeyDown}
@@ -157,9 +158,9 @@ const About = () => {
                   type="button"
                   className={`${
                     isActive
-                      ? "text-accent after:w-full after:bg-accent"
-                      : "after:w-8 after:bg-white"
-                  } relative cursor-pointer rounded-sm text-sm capitalize after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:transition-all after:duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:text-base xl:text-lg`}
+                      ? "border-accent/60 bg-accent/10 text-accent"
+                      : "border-white/10 bg-white/[0.035] text-white/55 hover:text-white"
+                  } game-chip shrink-0 px-4 py-2 text-sm capitalize transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent`}
                   onClick={() => selectTab(itemIndex)}
                   role="tab"
                   aria-selected={isActive}
@@ -174,16 +175,16 @@ const About = () => {
 
           <div
             id={`about-panel-${activeTabId}`}
-            className="flex flex-col items-center gap-y-5 py-2 xl:items-start xl:py-6"
+            className="portfolio-scrollbar flex flex-1 flex-col items-center gap-y-3 overflow-y-auto pr-1 xl:items-start"
             role="tabpanel"
             aria-labelledby={`about-tab-${activeTabId}`}
           >
             {aboutData[index].info.map((item) => (
               <div
                 key={`${item.title}-${item.stage || "icons"}`}
-                className="flex w-full flex-col items-center gap-2 rounded-2xl border border-white/10 bg-primary/20 p-4 text-center text-white/65 md:flex-row md:items-start md:text-left xl:max-w-none xl:border-0 xl:bg-transparent xl:p-0"
+                className="cyber-panel flex w-full flex-col items-center gap-2 rounded-2xl border border-white/10 bg-primary/20 p-4 text-center text-white/65 md:flex-row md:items-start md:text-left"
               >
-                <div className="min-w-[190px] font-medium text-white/85">
+                <div className="min-w-[180px] font-medium text-white/85">
                   {item.title}
                 </div>
                 {item.stage && <div className="hidden text-white/30 md:flex">-</div>}
@@ -203,7 +204,7 @@ const About = () => {
           </div>
         </motion.div>
       </div>
-    </section>
+    </ScreenFrame>
   );
 };
 

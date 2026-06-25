@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 
+import AchievementToast from "../components/AchievementToast";
 import AnimatedBackground from "../components/AnimatedBackground";
 import CursorGlow from "../components/CursorGlow";
 import GameHud from "../components/GameHud";
@@ -70,6 +71,7 @@ const Layout = ({ children }) => {
       <AnimatedBackground />
       <CursorGlow />
       <GameHud />
+      <AchievementToast />
       <ScrollProgress />
 
       <a
